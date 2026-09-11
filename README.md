@@ -21,7 +21,7 @@ Datasets we used are as follows:
 * **NIH ChestX-ray14**: We downloaded the [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) dataset as the chest radiographs.
 
 ### Data Preprocessing
-We preprocessed these datasets and split the dataset into train/val/test set using the code in `mgca/preprocess`.
+We preprocessed these datasets and split the dataset into train/test set using the code in `datapreprocess`.
 
 ### Pre-training
 
