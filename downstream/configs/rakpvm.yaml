@@ -1,0 +1,46 @@
+
+DEVICE: [0, 1, 2, 3]
+SEED: 999 # 100, 223, 999
+
+DATASET:
+  datadir: datasets
+  kg_datadir: KG
+
+MODEL:
+  dap:
+    current_lamba: 1.0
+    sim_lamba: 0.1
+    num_dap_tokens: 5
+    task_emb: 16
+    num_tasks_for_emb: 5
+    prompt_pool: 5
+
+OPTIMIZER:
+  opt_name: Adam
+  params:
+    lr: 0.01
+    weight_decay: 0
+    momentum: 0.9
+    beta1: 0.9
+    beta2: 0.9
+
+SCHEDULER:
+  sch_name: "linear"
+  params:
+    warmup_epoch: 0
+    total_epoch: 5
+
+LOSS:
+  loss_name: "softmax"
+  params: false
+
+TRAINING:
+  batch_size: 128
+  test_batch_size: 256
+  epochs: 100
+  log_interval: 1
+  use_scheduler: true
+  use_wandb: true
+
+RESULT:
+  log_dir: 'outputs'
