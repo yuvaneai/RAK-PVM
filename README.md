@@ -35,9 +35,5 @@ We pre-trained RAK_PVM on MIMIC-CXR using this command:
 cd pretraining_distillation/
 CUDA_VISIBLE_DEVICES=0 python pretrain_module.py
 
-
-
-
-
 ```
-We train our framework 50 epochs on 2 pieces of RTX 3090 GPUs with batch size of 144. It takes about *1 day* to pre-train this model.
+We train our framework 50 epochs on 2 pieces of RTX 3090 GPUs with batch size of 144. It takes about *1 day* to pre-train this mod
