@@ -57,4 +57,4 @@ We evaluate the linear classification performance of RAK-PVM using the following
 cd downstream/
 CUDA_VISIBLE_DEVICES=0 python main.py
 ```
-Both stages are conducted for 50 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128. 
+The downstream classification stage is conducted for 100 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128.
