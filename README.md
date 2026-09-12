@@ -1,7 +1,7 @@
 # RAK-PVM
 [Report-Derived Anatomical Knowledge for Pretrained Vision Model Adaptation in Chest X-ray Classification]
 
-![framework](docs/framework.pdf)
+![framework](docs/framework.png)
 
 ###  Installation
 To clone this repository:
