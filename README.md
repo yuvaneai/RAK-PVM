@@ -26,13 +26,35 @@ Datasets we used are as follows:
 ### Data Preprocessing
 We preprocessed these datasets and split the dataset into train/test set using the code in `datapreprocess`.
 
-### Pre-training
+### Pre-training and Distillation
 
-**Reminder**: Please check the paths in `pretraining_distillation/dataset/pretrain_dataset.py` and `pretrain_module.py` and make sure they are correct.
+**Reminder**: Please check the paths in `pretraining_distillation/dataset/pretrain_dataset.py`, `pretrain_module.py`, and `anatomy_distill.py` and make sure they are correctly configured.
 
-We pre-trained RAK_PVM on MIMIC-CXR using this command:
+#### Pre-training
+
+We pre-train RAK-PVM on MIMIC-CXR using the following command:
 ```
 cd pretraining_distillation/
 CUDA_VISIBLE_DEVICES=0 python pretrain_module.py
 ```
-We train our framework for 50 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128. The pre-training stage takes approximately one day.
+
+#### Distillation
+
+After pre-training, we perform report-free knowledge distillation using the following command:
+```
+cd pretraining_distillation/
+CUDA_VISIBLE_DEVICES=0 python anatomy_distill.py
+```
+
+Both stages are conducted for 50 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128. The two stages take approximately one day in total to complete.
+
+### Downstream Classification
+
+**Reminder**: Please check the paths in `downstream/dataloader/factory.py`, `pretrain_module.py`, and `downstream/models/rakpvm.py` and make sure they are correctly configured.
+
+We evaluate the linear classification performance of RAK-PVM using the following command:
+```
+cd downstream/
+CUDA_VISIBLE_DEVICES=0 python main.py
+```
+Both stages are conducted for 50 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128. 
