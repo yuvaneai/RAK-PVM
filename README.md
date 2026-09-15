@@ -68,7 +68,7 @@ cd pretraining_distillation/
 CUDA_VISIBLE_DEVICES=0 python relation_distill.py
 ```
 
-The pre-training and two distillation stages are conducted for 50 epochs with a batch size of 128 on a single NVIDIA RTX PRO 6000 GPU. On our hardware, the three stages take approximately one day in total.
+The pre-training and two distillation stages are conducted for 50 epochs with a batch size of 128 on a single NVIDIA RTX PRO 6000 GPU.
 
 ### Downstream Classification
 
