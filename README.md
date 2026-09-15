@@ -25,7 +25,7 @@ We use the following publicly available chest X-ray datasets:
 
 * **MIMIC-CXR**: We use [MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/) as the chest radiographs. The corresponding radiology reports can be downloaded from [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/mimic-cxr-reports.zip).
 
-* **ChestX-Det10**: We use [ChestX-Det10](https://github.com/wangtao123456/ChestX-Det10) as the chest radiograph dataset.
+* **ChestX-Det10**: We use [ChestX-Det10](https://github.com/Deepwise-AILab/ChestX-Det10-Dataset) as the chest radiograph dataset.
 
 * **NIH ChestX-ray14**: We use [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) as the chest radiograph dataset.
 
@@ -83,4 +83,4 @@ cd downstream/
 CUDA_VISIBLE_DEVICES=0 python main.py
 ```
 
-The downstream classification stage is conducted for 100 epochs with a batch size of 128 on a single NVIDIA RTX PRO 6000 GPU.
+The downstream stage uses 100 epochs and a batch size of 128.
