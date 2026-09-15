@@ -19,7 +19,7 @@ To install the required Python dependencies:
 pip install -r requirements.txt
 ```
 
-### Dataset Downloading
+### Dataset Download
 
 We use the following publicly available chest X-ray datasets:
 
@@ -31,7 +31,7 @@ We use the following publicly available chest X-ray datasets:
 
 ### Data Preprocessing
 
-We preprocess the datasets and construct the train/test splits using the scripts provided in `data_preprocess`.
+We preprocess the datasets and construct the training/test splits using the scripts provided in `data_preprocess`.
 
 Please configure the corresponding local dataset paths before running the preprocessing scripts.
 
@@ -75,8 +75,6 @@ The pre-training and two distillation stages are conducted for 50 epochs with a 
 RAK-PVM supports report-free image-only inference for downstream chest X-ray classification.
 
 **Reminder:** Please update the dataset and pretrained checkpoint paths in the corresponding downstream scripts according to your local environment.
-
-We evaluate the linear classification performance of RAK-PVM using:
 
 ```bash
 cd downstream/
