@@ -7,9 +7,7 @@
 ## Abstract
 
 Adapting pretrained vision models to chest X-ray classification remains challenging due to the lack of scalable anatomical supervision, as expert-level region annotations are costly to acquire. Radiology reports contain rich anatomical descriptions and clinical knowledge; however, such knowledge is implicitly expressed in free-form narratives and lacks explicit correspondence with visual representations. In this work, we propose RAK-PVM, a framework that leverages report-derived anatomical knowledge to adapt pretrained vision models for chest X-ray classification.
-
 Specifically, RAK-PVM transforms radiology reports into structured lesion--anatomy--status relations for anatomical knowledge modeling and grounds the derived knowledge in visual representations through anatomy-aware semantic and relational modeling. To support report-free deployment, the learned anatomical representations are further distilled into a report-independent model for image-only inference.
-
 Extensive experiments on multiple chest X-ray benchmarks demonstrate the effectiveness and generalization capabilities of RAK-PVM under report-free image-only deployment, highlighting the potential of leveraging structured anatomical knowledge from radiology reports for pretrained vision model adaptation without requiring costly region-level annotations.
 
 
