@@ -82,5 +82,3 @@ We evaluate the linear classification performance of RAK-PVM using:
 cd downstream/
 CUDA_VISIBLE_DEVICES=0 python main.py
 ```
-
-The downstream stage uses 100 epochs and a batch size of 128.
