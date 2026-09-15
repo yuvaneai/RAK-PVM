@@ -1,60 +1,86 @@
 # RAK-PVM
-[Report-Derived Anatomical Knowledge for Pretrained Vision Model Adaptation in Chest X-ray Classification]
+
+**Report-Derived Anatomical Knowledge for Pretrained Vision Model Adaptation in Chest X-ray Classification**
 
 ![framework](docs/framework.png)
 
-###  Installation
+### Installation
+
 To clone this repository:
-```
+
+```bash
 git clone https://github.com/yuvaneai/RAK-PVM.git
+cd RAK-PVM
 ```
-To install Python dependencies:
-```
+
+To install the required Python dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Dataset downloading
+### Dataset Downloading
 
-Datasets we used are as follows:
+We use the following publicly available chest X-ray datasets:
 
-* **MIMIC-CXR**: We downloaded the [MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/) dataset as the radiographs. Paired medical reports can be downloaded in [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/mimic-cxr-reports.zip).
+* **MIMIC-CXR**: We use [MIMIC-CXR-JPG](https://physionet.org/content/mimic-cxr-jpg/2.0.0/) as the chest radiographs. The corresponding radiology reports can be downloaded from [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.0.0/mimic-cxr-reports.zip).
 
-* **ChestX-Det10**: We downloaded the [ChestX-Det10](https://github.com/wangtao123456/ChestX-Det10) dataset as the chest radiographs.
+* **ChestX-Det10**: We use [ChestX-Det10](https://github.com/wangtao123456/ChestX-Det10) as the chest radiograph dataset.
 
-* **NIH ChestX-ray14**: We downloaded the [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) dataset as the chest radiographs.
+* **NIH ChestX-ray14**: We use [NIH ChestX-ray14](https://nihcc.app.box.com/v/ChestXray-NIHCC) as the chest radiograph dataset.
 
 ### Data Preprocessing
-We preprocessed these datasets and split the dataset into train/test set using the code in `datapreprocess`.
 
-### Pre-training and Distillation
+We preprocess the datasets and construct the train/test splits using the scripts provided in `data_preprocess`.
 
-**Reminder**: Please check the paths in `pretraining_distillation/dataset/pretrain_dataset.py`, `pretrain_module.py`, and `anatomy_distill.py` and make sure they are correctly configured.
+Please configure the corresponding local dataset paths before running the preprocessing scripts.
+
+### Pre-training and Knowledge Distillation
+
+RAK-PVM consists of report-guided pre-training followed by two report-free knowledge distillation stages for anatomy and relational knowledge.
+
+**Reminder:** Please update the dataset and checkpoint paths in the corresponding scripts according to your local environment.
 
 #### Pre-training
 
-We pre-train RAK-PVM on MIMIC-CXR using the following command:
-```
+We pre-train RAK-PVM on MIMIC-CXR using:
+
+```bash
 cd pretraining_distillation/
 CUDA_VISIBLE_DEVICES=0 python pretrain_module.py
 ```
 
-#### Distillation
+#### Anatomy Distillation
 
-After pre-training, we perform report-free knowledge distillation using the following command:
-```
+After pre-training, we distill the anatomy-enhanced representations using:
+
+```bash
 cd pretraining_distillation/
 CUDA_VISIBLE_DEVICES=0 python anatomy_distill.py
 ```
 
-Both stages are conducted for 50 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128. The two stages take approximately one day in total to complete.
+#### Relation Distillation
+
+We then distill the report-derived relational knowledge into a report-independent relational prior using:
+
+```bash
+cd pretraining_distillation/
+CUDA_VISIBLE_DEVICES=0 python relation_distill.py
+```
+
+The pre-training and two distillation stages are conducted for 50 epochs with a batch size of 128 on a single NVIDIA RTX PRO 6000 GPU. On our hardware, the three stages take approximately one day in total.
 
 ### Downstream Classification
 
-**Reminder**: Please check the paths in `downstream/dataloader/factory.py`, `pretrain_module.py`, and `downstream/models/rakpvm.py` and make sure they are correctly configured.
+RAK-PVM supports report-free image-only inference for downstream chest X-ray classification.
 
-We evaluate the linear classification performance of RAK-PVM using the following command:
-```
+**Reminder:** Please update the dataset and pretrained checkpoint paths in the corresponding downstream scripts according to your local environment.
+
+We evaluate the linear classification performance of RAK-PVM using:
+
+```bash
 cd downstream/
 CUDA_VISIBLE_DEVICES=0 python main.py
 ```
-The downstream classification stage is conducted for 100 epochs on a single NVIDIA RTX PRO 6000 GPU with a batch size of 128.
+
+The downstream classification stage is conducted for 100 epochs with a batch size of 128 on a single NVIDIA RTX PRO 6000 GPU.
